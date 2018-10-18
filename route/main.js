@@ -1,6 +1,3 @@
-const upload = require("../func/upload");
-const analyzer = requ("audio-analyser");
-
 module.exports = function(app, upload)
 {
     app.get("/", function(req, res){
