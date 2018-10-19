@@ -1,6 +1,7 @@
 const analyse = require("../func/analyse");
 const mysql = require("mysql");
 var dbConfig = require("../configs/dbconf.json");
+const fs = require('fs');
 
 module.exports = function(app, upload)
 {
@@ -44,10 +45,14 @@ module.exports = function(app, upload)
         connection.query(sql, fileinfo, function (err, result) {
             if (err)
             {
-                throw err;
+                //throw err;
                 res.status.send("Insert Error");
             } 
         });
+
+//console.log(file);
+
+	fs.unlink(file.path);
     
        res.json(fileinfo);
     });
