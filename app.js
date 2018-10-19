@@ -3,7 +3,10 @@ const app = express();
 const multer = require("multer");
 
 var storage = multer.memoryStorage();
-var upload = multer({ storage: storage })
+//var upload = multer({ storage: storage })
+
+var upload = multer({ dest: 'uploaders/' })
+
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');

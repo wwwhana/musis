@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "audio-analyser": "1.0.2",
+    "aubio": "^0.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "multer": "^1.4.1",
