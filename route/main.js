@@ -1,9 +1,21 @@
 const analyse = require("../func/analyse");
+const mysql = require("mysql");
+var dbConfig = require("../configs/dbconf.json");
 
 module.exports = function(app, upload)
 {
     app.get("/", function(req, res){
         res.render('index.html');
+    });
+
+    app.get("/data", function(req, res){
+	var connection = mysql.createConnection(dbConfig);
+        connection.query('SELECT * from musis', function(err, rows) {
+            if(err) throw err;
+        
+            console.log('The solution is: ', rows);
+            res.send(rows);
+        });
     });
 
     app.post("/analyze", upload.single("music_file"), function(req, res, next){
@@ -17,16 +29,25 @@ module.exports = function(app, upload)
 	});
 
         let fileinfo = {
-            name : file.originalname,
             title : req.body.title,
             artist : req.body.artist,
                 beats : analyse_result.beats,
                 high_pitch : analyse_result.high_pitch,
                 low_pitch : analyse_result.low_pitch,
                 bpm : analyse_result.bpm,
-                tempo : analyse_result.tempo,
                 cur_time : analyse_result.cur_time
         };
+
+        var sql = "INSERT INTO innodb.musis SET ?";
+
+        var connection = mysql.createConnection(dbConfig);
+        connection.query(sql, fileinfo, function (err, result) {
+            if (err)
+            {
+                throw err;
+                res.status.send("Insert Error");
+            } 
+        });
     
        res.json(fileinfo);
     });
