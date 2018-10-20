@@ -6,7 +6,8 @@ const fs = require('fs');
 module.exports = function(app, upload)
 {
     app.get("/", function(req, res){
-		        connection.query('SELECT * from musis', function(err, rows) {
+			var connection = mysql.createConnection(dbConfig);
+			connection.query('SELECT * from musis', function(err, rows) {
             if(err) throw err;
         
             console.log('The solution is: ', rows);
