@@ -6,7 +6,13 @@ const fs = require('fs');
 module.exports = function(app, upload)
 {
     app.get("/", function(req, res){
-        res.render('index.html');
+		        connection.query('SELECT * from musis', function(err, rows) {
+            if(err) throw err;
+        
+            console.log('The solution is: ', rows);
+		
+			res.render('index.html');
+        });
     });
 
     app.get("/data", function(req, res){
@@ -23,11 +29,11 @@ module.exports = function(app, upload)
 
         var file = req.file;
     
-	var analyse_result = analyse(file.path, {
-		samplerate: 44100,
-		win_s : 1024,
-		hop_s : 512,
-	});
+		var analyse_result = analyse(file.path, {
+			samplerate: 44100,
+			win_s : 1024,
+			hop_s : 512,
+		});
 
         let fileinfo = {
             title : req.body.title,

@@ -9,5 +9,27 @@
           <input name="music_file" type="file" accept=".mp3"/>
           <button>분석</button>
       </form>
+	  
+
+<table>
+   <tr>
+      <th>m_id</th><th>artist</th><th>title</th><th>beats</th><th>high_pitch</th><th>low_pitch</th><th>bpm</th><th>cur_time</th>
+   </tr>
+
+   <% for (var i = 0; i < rows.length;  i++) { %>
+    <tr>
+		<td><%= rows[i].m_id %></td>
+		<td><%= rows[i].artist %></td>
+		<td><%= rows[i].title %></td>
+		<td><%= rows[i].beats %></td>
+		<td><%= rows[i].high_pitch %></td>
+		<td><%= rows[i].low_pitch %></td>
+		<td><%= rows[i].bpm %></td>
+		<td><%= rows[i].cur_time %></td>
+    </tr>    
+   <% } %>
+</table>
+
+
   </body>
 </html>
