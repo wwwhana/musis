@@ -12,7 +12,7 @@ module.exports = function(app, upload)
         
             console.log('The solution is: ', rows);
 		
-			res.render('index');
+			res.render('index', {rows : rows});
         });
     });
 
